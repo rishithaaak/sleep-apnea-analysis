@@ -5,15 +5,6 @@ This project investigates how everyday habits, behaviors, and demographics impac
 * **Project Presentation:** [BridgeUP Google Slides Link](https://docs.google.com/presentation/d/1rmoPrBiLIrEcYSMO0G9VlKKFpu8_xN3Z0kthT8RVUJo/edit?usp=sharing)
 * **Team (Group 1 - Dr. Rong):** Anna, Annie, Amulya, Shivali, Rishitha
 
----
-
-## Tech Stack
-* **Language:** Python
-* **Data Manipulation:** Pandas, NumPy
-* **Data Visualization:** Matplotlib, Seaborn
-
----
-
 ## Data Cleaning & Imputation Strategy
 
 The raw dataset tracks 15 variables per individual, including sleep architecture percentages (REM, Deep, Light), sleep schedules, and lifestyle trackers (caffeine, alcohol, smoking, and exercise). 
@@ -24,7 +15,7 @@ To fix missing records without introducing distribution bias or data leakage, we
 * **Caffeine Consumption (25 missing values):** Sorted the rows by age brackets and applied a backward fill (`bfill`) to keep age-group consumption habits intact.
 * **Alcohol Consumption (14 missing values):** Sorted by age brackets and backward-filled (`bfill`) to maintain accurate generational habits.
 
----
+
 
 ## Key Analytical Insights
 
@@ -41,10 +32,3 @@ We used box plots to see if sleep patterns varied significantly by biological se
 ### 3. Lifestyle Interactions
 We generated scatterplots and bar charts to map individual habits directly against sleep quality. This allowed us to visualize exactly how compounding behaviors—like drinking alcohol close to bedtime versus higher weekly exercise frequencies—directly impact deep sleep and REM cycles.
 
----
-
-## Repository Structure
-
-```text
-├── data/
-│   ├── raw/         <- Original,
