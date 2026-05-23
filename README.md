@@ -1,42 +1,50 @@
-# Human Sleep Efficiency & Behavioral Analytics
+# Sleep Efficiency & Lifestyle Factor Analysis
 
-An end-to-end statistical data science study analyzing the demographic, physiological, and behavioral determinants of human sleep efficiency. Utilizing a clinical-style cohort dataset of 425 individuals across 15 biometric and lifestyle variables, this project builds a robust data preprocessing pipeline, handles non-random missingness through age-stratified backfilling, and executes advanced exploratory data analysis (EDA) to map the behavioral factors influencing sleep quality.
+This project investigates how everyday habits, behaviors, and demographics impact baseline sleep quality. Using a dataset of 425 individuals, we cleaned missing data points, analyzed feature correlations, and built visualizations to isolate the primary lifestyle drivers behind sleep efficiency.
 
-* **Slide Presentation:** [BridgeUP Research Presentation](https://docs.google.com/presentation/d/1rmoPrBiLIrEcYSMO0G9VlKKFpu8_xN3Z0kthT8RVUJo/edit?usp=sharing)
-* **Research Team (Group 1 — Dr. Rong):** Anna, Annie, Amulya, Shivali, Rishitha
-
----
-
-## Technical Core & Engineering Stack
-
-* **Language:** Python 3
-* **Data Ingestion & Engineering:** Pandas, NumPy
-* **Statistical Modeling & Data Visualization:** Seaborn, Matplotlib
+* **Project Presentation:** [BridgeUP Google Slides Link](https://docs.google.com/presentation/d/1rmoPrBiLIrEcYSMO0G9VlKKFpu8_xN3Z0kthT8RVUJo/edit?usp=sharing)
+* **Team (Group 1 - Dr. Rong):** Anna, Annie, Amulya, Shivali, Rishitha
 
 ---
 
-## Data Engineering Pipeline & Cleaning Strategy
-
-The raw dataset tracks 425 patients across 15 multi-type attributes, spanning sleep architecture ratios (REM, Deep, and Light sleep percentages), temporal metrics (Bedtime, Wake-up time, total Sleep Duration), and routine lifestyle variables. 
-
-To ensure statistical validity and prevent data leakage or distribution bias during subsequent modeling, a strict imputation and validation pipeline was developed:
-
-| Feature Vector | Missing Records | Imputation Methodology & Engineering Rationale |
-| :--- | :---: | :--- |
-| **Awakenings** | 20 | **Median Imputation**: Utilized the sample median to preserve the structural distribution and mitigate the skewing impact of extreme outliers. |
-| **Caffeine Consumption** | 25 | **Age-Stratified Backward Fill (bfill)**: Sorted the cohort chronologically by age to capture and preserve localized, generation-specific dietary habits. |
-| **Alcohol Consumption** | 14 | **Age-Stratified Backward Fill (bfill)**: Maintained demographic alignment by sorting by age before imputation to reflect lifecourse consumption trends accurately. |
+## Tech Stack
+* **Language:** Python
+* **Data Manipulation:** Pandas, NumPy
+* **Data Visualization:** Matplotlib, Seaborn
 
 ---
 
-## Exploratory Data Analysis & Statistical Insights
+## Data Cleaning & Imputation Strategy
 
-### 1. Multi-Variable Feature Correlation
-A Pearson correlation matrix was generated across all continuous numerical features to discover hidden co-dependencies and evaluate linear relationships with the target metric (`Sleep efficiency`):
-* **Age vs. Efficiency:** Statistical analysis disproved the initial hypothesis of a strong linear decay; chronological age does not exhibit a dominant global correlation with sleep efficiency.
-* **Granular Timeline Trends:** Segmenting the dataset revealed a localized, statistically minor positive correlation between younger age metrics and peak sleep efficiency specifically during early-stage adulthood.
+The raw dataset tracks 15 variables per individual, including sleep architecture percentages (REM, Deep, Light), sleep schedules, and lifestyle trackers (caffeine, alcohol, smoking, and exercise). 
 
-### 2. Demographic Cohort Segmentation
-Evaluating the target metric across gender boundaries highlighted systemic structural variations within the dataset population:
-* **The Variance:** Comparative data visualizations via box plots demonstrated that male participants exhibited a marginally higher mean sleep efficiency score relative to female participants.
-* **Domain Context:** This variance was contextualized using clinical literature regarding physiological and endocrine fluctuations in women, which historically introduces higher base-rate risks for idiopathic insomnia.
+To fix missing records without introducing distribution bias or data leakage, we applied the following cleaning steps:
+
+* **Awakenings (20 missing values):** Filled missing rows using the dataset median to prevent extreme values from throwing off the distribution.
+* **Caffeine Consumption (25 missing values):** Sorted the rows by age brackets and applied a backward fill (`bfill`) to keep age-group consumption habits intact.
+* **Alcohol Consumption (14 missing values):** Sorted by age brackets and backward-filled (`bfill`) to maintain accurate generational habits.
+
+---
+
+## Key Analytical Insights
+
+### 1. Correlation Analysis
+We mapped a Pearson correlation matrix across all numeric features to find out what actually drives target sleep efficiency:
+* **Age vs. Sleep Efficiency:** Surprisingly, we found no strong overall correlation between absolute age and sleep efficiency. 
+* **Early Adulthood:** When breaking down age groups further, there is a slight positive correlation between younger age ranges and higher efficiency scores, which drops off as the cohort matures.
+
+### 2. Gender Grouping & Distributions
+We used box plots to see if sleep patterns varied significantly by biological sex:
+* **The Data:** On average, men in this dataset maintained slightly higher sleep efficiency scores than women.
+* **The Context:** Based on clinical literature, this baseline gap is frequently linked to hormonal fluctuations in women that inherently raise the statistical risk for insomnia.
+
+### 3. Lifestyle Interactions
+We generated scatterplots and bar charts to map individual habits directly against sleep quality. This allowed us to visualize exactly how compounding behaviors—like drinking alcohol close to bedtime versus higher weekly exercise frequencies—directly impact deep sleep and REM cycles.
+
+---
+
+## Repository Structure
+
+```text
+├── data/
+│   ├── raw/         <- Original,
